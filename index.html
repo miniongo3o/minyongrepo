@@ -63,10 +63,8 @@
       <div class="col-md-8 mb-5">
         <h2>응시자 리스트</h2>
         <hr>
-
-        <p><input type="button" id="button1" onclick="button1_click();" value="1번 응시자"/></p>
-        <p><input type="button" id="button2" onclick="button2_click();" value="2번 응시자"/></p>
-        <p><input type="button" id="button3" onclick="button3_click();" value="3번 응시자"/></p>
+        <p id="user_list"></p>
+        <p><input type="button" id="button3" onclick="button3_click();" value="응시자 수 출력"/></p>
         <!--<a class="btn btn-primary btn-lg" href="#">Call to Action &raquo;</a>-->
       </div>
       <div class="col-md-4 mb-5">
@@ -83,7 +81,7 @@
           (123) 456-7890
           <br>
           <abbr title="Email">E:</abbr>
-          <a href="mailto:#">minyong@icu.com</a>
+          minyong@icu.com
         </address>
       </div>
     </div>
@@ -143,12 +141,34 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
-      function button1_click(){
-        alert("1 버튼이 눌렸습니다.");
+    var temp_var = new XMLHttpRequest();
+    temp_var.open("GET", "https://0jrsvc8y79.execute-api.us-east-1.amazonaws.com/icu-rest-index");
+    temp_var.send();
+    temp_var.onreadystatechange = function () {
+      if (temp_var.readyState !== XMLHttpRequest.DONE) return;
+      if (temp_var.status === 200) {
+        //console.log(temp_var.responseText);
+        // Deserializing (String → Object)
+        responseObject = JSON.parse(temp_var.responseText);
+        // JSON → HTML String
+        var count = 0;
+        let newContent = '';
+        responseObject.forEach((responseObject) => {
+
+          newContent += `
+                        <div class="item" >
+                            <a class="name" href="#" id='tester' value=${responseObject.user_name}>${responseObject.user_name}번 응시자</a>
+                        </div>`;
+        });
+        //console.log(newContent);
+        document.getElementById("user_list").innerHTML = newContent;
+      } else {
+        console.log(`[${temp_var.status}] : ${temp_var.statusText}`);
       }
-      function button2_click(){
-        alert("2 버튼이 눌렸습니다.");
-      }
+    };
+
+
+
       function button3_click(){
         var modal_xhr = new XMLHttpRequest();
     modal_xhr.open("GET", "https://gp704j3ag6.execute-api.us-east-1.amazonaws.com/users/");
@@ -156,19 +176,9 @@
     modal_xhr.onreadystatechange = function () {
       if (modal_xhr.readyState !== XMLHttpRequest.DONE) return;
       if (modal_xhr.status === 200) {
-        //console.log(modal_xhr.responseText);
-        // Deserializing (String → Object)
         responseObject = JSON.parse(modal_xhr.responseText);
-        alert(responseObject);
-        // JSON → HTML String
-        var count = 0;
-        let newContent = '';
-        responseObject.forEach((responseObject) => {
+        alert(responseObject.user_count);
 
-
-        });
-        //console.log(newContent);
-        document.getElementById("search_list").innerHTML = newContent;
       } else {
         console.log(`[${modal_xhr.status}] : ${modal_xhr.statusText}`);
       }
