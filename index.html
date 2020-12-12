@@ -150,7 +150,29 @@
         alert("2 버튼이 눌렸습니다.");
       }
       function button3_click(){
-        alert("3 버튼이 눌렸습니다.");
+        var modal_xhr = new XMLHttpRequest();
+    modal_xhr.open("GET", "https://gp704j3ag6.execute-api.us-east-1.amazonaws.com/users/");
+    modal_xhr.send();
+    modal_xhr.onreadystatechange = function () {
+      if (modal_xhr.readyState !== XMLHttpRequest.DONE) return;
+      if (modal_xhr.status === 200) {
+        //console.log(modal_xhr.responseText);
+        // Deserializing (String → Object)
+        responseObject = JSON.parse(modal_xhr.responseText);
+        alert(responseObject);
+        // JSON → HTML String
+        var count = 0;
+        let newContent = '';
+        responseObject.forEach((responseObject) => {
+
+
+        });
+        //console.log(newContent);
+        document.getElementById("search_list").innerHTML = newContent;
+      } else {
+        console.log(`[${modal_xhr.status}] : ${modal_xhr.statusText}`);
+      }
+    };
       }
 
 
