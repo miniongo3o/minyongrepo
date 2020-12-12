@@ -49,7 +49,7 @@
       <div class="row h-100 align-items-center">
         <div class="col-lg-12">
           <h1 class="display-4 text-white mt-5 mb-2">ICU 관리자 페이지</h1>
-          <p class="lead mb-5 text-white-50">응시자들의 부정행위 현황 파악, 개인 메세지를 보낼 수 있습니다.</p>
+          <p class="lead mb-5 text-white-50">응시자들의 부정행위 현황을 조회할 수 있습니다.</p>
           
         </div>
       </div>
@@ -64,7 +64,7 @@
         <h2>응시자 리스트</h2>
         <hr>
         <p id="user_list"></p>
-        <p><input type="button" id="button3" onclick="button3_click();" value="응시자 수 출력"/></p>
+
         <!--<a class="btn btn-primary btn-lg" href="#">Call to Action &raquo;</a>-->
       </div>
       <div class="col-md-4 mb-5">
@@ -90,38 +90,8 @@
     <h2>부정행위 이미지</h2>
     <div class="row">
       
-      <div class="col-md-4 mb-5">
-        <div class="card h-100">
-          <img class="card-img-top" src="./images/cheater.png" alt="">
-          <div class="card-body">
-            <h4 class="card-title">1번 응시자</h4>
-            <p class="card-text">2020.11.27.13:57:32<br>비인가 디바이스 착용</p>
-          </div>
-          <div class="card-footer">
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-5">
-        <div class="card h-100">
-          <img class="card-img-top" src="./images/cheater.png" alt="">
-          <div class="card-body">
-            <h4 class="card-title">1번 응시자</h4>
-            <p class="card-text">2020.11.27.13:55:22<br>불필요한 시선 이동</p>
-          </div>
-          <div class="card-footer">
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-5">
-        <div class="card h-100">
-          <img class="card-img-top" src="./images/ac.PNG" alt="">
-          <div class="card-body">
-            <h4 class="card-title">2번 응시자</h4>
-            <p class="card-text">2020.11.27.13:57:32<br>대화 음성 감지</p>
-          </div>
-          <div class="card-footer">
-          </div>
-        </div>
+      <div class="col-md-4 mb-5" id="image_list">
+
       </div>
     </div>
     <!-- /.row -->
@@ -136,6 +106,7 @@
     </div>
     <!-- /.container -->
   </footer>
+
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -159,6 +130,7 @@
                         <div class="item" >
                             <a class="name" href="#" id='tester' value=${responseObject.user_name}>${responseObject.user_name}번 응시자</a>
                         </div>`;
+
         });
         //console.log(newContent);
         document.getElementById("user_list").innerHTML = newContent;
@@ -167,24 +139,38 @@
       }
     };
 
+    var images = new XMLHttpRequest();
+        images.open("GET", "https://29bjyftjhi.execute-api.us-east-1.amazonaws.com/icu-rest-index-image");
+        images.send();
+        images.onreadystatechange = function () {
+          if (images.readyState !== XMLHttpRequest.DONE) return;
+          if (images.status === 200) {
+            //console.log(images.responseText);
+            // Deserializing (String → Object)
+            imageObject = JSON.parse(images.responseText);
+            // JSON → HTML String
+            var count = 0;
+            let imageContent = '';
+            imageObject.forEach((imageObject) => {
 
+              imageContent +=
+                            `<div class="card h-100">
+                              <img class="card-img-top" src="${imageObject.img_url}" alt="">
+                                <div class="card-body">
+                                <h4 class="card-title">${imageObject.tester_num}번 응시자</h4>
+                                <p class="card-text">2020.11.27.13:57:32<br>비인가 디바이스 착용</p>
+                                </div>
+                              <div class="card-footer">
+                              </div>
+                            </div>`;
 
-      function button3_click(){
-        var modal_xhr = new XMLHttpRequest();
-    modal_xhr.open("GET", "https://gp704j3ag6.execute-api.us-east-1.amazonaws.com/users/");
-    modal_xhr.send();
-    modal_xhr.onreadystatechange = function () {
-      if (modal_xhr.readyState !== XMLHttpRequest.DONE) return;
-      if (modal_xhr.status === 200) {
-        responseObject = JSON.parse(modal_xhr.responseText);
-        alert(responseObject.user_count);
+            });
 
-      } else {
-        console.log(`[${modal_xhr.status}] : ${modal_xhr.statusText}`);
-      }
-    };
-      }
-
+            document.getElementById("image_list").innerHTML = imageContent;
+          } else {
+            console.log(`[${images.status}] : ${images.statusText}`);
+          }
+        };
 
 
 
