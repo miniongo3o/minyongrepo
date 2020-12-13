@@ -116,6 +116,7 @@
     temp_var.open("GET", "https://0jrsvc8y79.execute-api.us-east-1.amazonaws.com/icu-rest-index");
     temp_var.send();
     temp_var.onreadystatechange = function () {
+
       if (temp_var.readyState !== XMLHttpRequest.DONE) return;
       if (temp_var.status === 200) {
         //console.log(temp_var.responseText);
@@ -127,7 +128,7 @@
         responseObject.forEach((responseObject) => {
 
           newContent += `
-                        <div class="item" >
+                        <div class="item" style="font-size:x-large" >
                             <a class="name" href="#" id='tester' value=${responseObject.user_name}>${responseObject.user_name}번 응시자</a>
                         </div>`;
 
@@ -143,6 +144,7 @@
         images.open("GET", "https://29bjyftjhi.execute-api.us-east-1.amazonaws.com/icu-rest-index-image");
         images.send();
         images.onreadystatechange = function () {
+
           if (images.readyState !== XMLHttpRequest.DONE) return;
           if (images.status === 200) {
             //console.log(images.responseText);
@@ -173,10 +175,8 @@
             console.log(`[${images.status}] : ${images.statusText}`);
           }
         };
-
-
-
   </script>
+
 </body>
 
 </html>
