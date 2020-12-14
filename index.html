@@ -30,7 +30,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">bn
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">메세지!
+            <a class="nav-link" href="#">메세지
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -88,7 +88,7 @@
     </div>
     <!-- /.row -->
 
-    <h2>부정행위 이미지</h2>
+    <h2>최신 부정행위 이미지</h2>
     <div class="row" id="image_list">
       
 
@@ -129,7 +129,8 @@
 
           newContent += `
                         <div class="item" style="font-size:x-large" >
-                            <a class="name" href="#" id='tester' value=${responseObject.user_name}>${responseObject.user_name}번 응시자</a>
+                            <a class="name" href="#" value="https://wvbfz4nzmb.execute-api.us-east-1.amazonaws.com/api-get-image-by-num/${responseObject.user_name}" id=${responseObject.user_name}>${responseObject.user_name}번 응시자</a>
+                            <button onclick="click_event()">${responseObject.user_name}번 응시자</button>
                         </div>`;
 
         });
@@ -175,7 +176,9 @@
             console.log(`[${images.status}] : ${images.statusText}`);
           }
         };
-  
+  function click_event() {
+  	alert("버튼1을 누르셨습니다.");
+  }
   /*
   playAlert = setInterval(function() {
     var temp_var = new XMLHttpRequest();
