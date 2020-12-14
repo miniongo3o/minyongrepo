@@ -130,7 +130,7 @@
           newContent += `
                         <div class="item" style="font-size:x-large" >
                             <a class="name" href="#" value="https://wvbfz4nzmb.execute-api.us-east-1.amazonaws.com/api-get-image-by-num/${responseObject.user_name}" id=${responseObject.user_name}>${responseObject.user_name}번 응시자</a>
-                            <button onclick="click_event()">${responseObject.user_name}번 응시자</button>
+                            <button onclick="click_event(this.id)" id=${responseObject.user_name}>${responseObject.user_name}번 응시자</button>
                         </div>`;
 
         });
@@ -176,9 +176,15 @@
             console.log(`[${images.status}] : ${images.statusText}`);
           }
         };
-  function click_event() {
-  	alert("버튼1을 누르셨습니다.");
+
+
+  function click_event(clicked_id) {
+    alert(clicked_id);
+    url="https://nmda822ird.execute-api.us-east-1.amazonaws.com/dev/icu-func-user-image?table=cheat_list&test_num="
+  
   }
+
+
   /*
   playAlert = setInterval(function() {
     var temp_var = new XMLHttpRequest();
