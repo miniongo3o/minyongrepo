@@ -23,7 +23,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">ICU : I See You</a>
+      <a class="navbar-brand" href="./">ICU : I See You</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -129,7 +129,6 @@
 
           newContent += `
                         <div class="item" style="font-size:x-large" >
-                            <a class="name" href="#" value="https://wvbfz4nzmb.execute-api.us-east-1.amazonaws.com/api-get-image-by-num/${responseObject.user_name}" id=${responseObject.user_name}>${responseObject.user_name}번 응시자</a>
                             <button onclick="click_event(this.id)" id=${responseObject.user_name}>${responseObject.user_name}번 응시자</button>
                         </div>`;
 
@@ -179,12 +178,41 @@
 
 
   function click_event(clicked_id) {
-    alert(clicked_id);
-    url="https://nmda822ird.execute-api.us-east-1.amazonaws.com/dev/icu-func-user-image?table=cheat_list&test_num="
+    var my_url="https://nmda822ird.execute-api.us-east-1.amazonaws.com/dev/icu-func-user-image?table=cheat_list&test_num="+String(clicked_id)
+    console.log(my_url)
+    var click_var = new XMLHttpRequest();
+    click_var.open("GET", my_url);
+    
+    click_var.send();
+    click_var.onreadystatechange = function () {
+      if (click_var.readyState !== XMLHttpRequest.DONE) return;
+      if (click_var.status === 200) {
+        let newContent='';
+        resp = JSON.parse(click_var.responseText);
+        
+        resp.forEach((resp) => {
+          newContent += 
+                            `
+                            <div class="col-md-4 mb-5" >
+                              <div class="card h-100">
+                                <img class="card-img-top" src="${resp.img_url}" alt="">
+                                <div class="card-body">
+                                  <h4 class="card-title">${resp.tester_num}번  응시자</h4>
+                                  <p class="card-text">2020.11.27.13:57:32<br>비인가 디바이스 착용</p>
+                                </div>
+                              </div>
+                            </div>
+                            `;
+        });
+        document.getElementById("image_list").innerHTML = newContent;
+      } else {
+        console.log(`[${click_var.status}] : ${click_var.statusText}`);
+      }
+    
   
   }
 
-
+} 
   /*
   playAlert = setInterval(function() {
     var temp_var = new XMLHttpRequest();
