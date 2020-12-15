@@ -62,9 +62,15 @@
 
     <div class="row">
       <div class="col-md-8 mb-5">
-        <h2>응시자 리스트</h2>
+        <h2><select name='user_option' id='user_option' onchange="change_select()"></select></h2>
         <hr>
-        <p id="user_list"></p>
+        
+        
+        
+          
+        
+        
+        
 
         <!--<a class="btn btn-primary btn-lg" href="#">Call to Action &raquo;</a>-->
       </div>
@@ -112,6 +118,7 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
+    // 드랍다운 리스트에 db응시자수만큼 추가
     var temp_var = new XMLHttpRequest();
     temp_var.open("GET", "https://0jrsvc8y79.execute-api.us-east-1.amazonaws.com/icu-rest-index");
     temp_var.send();
@@ -124,22 +131,25 @@
         responseObject = JSON.parse(temp_var.responseText);
         // JSON → HTML String
         var count = 0;
-        let newContent = '';
+        
+        let tempContent = `<option value="" selected disabled>응시자 선택</option>             `;
         responseObject.forEach((responseObject) => {
 
-          newContent += `
-                        <div class="item" style="font-size:x-large" >
-                            <button onclick="click_event(this.id)" id=${responseObject.user_name}>${responseObject.user_name}번 응시자</button>
-                        </div>`;
+          
+          tempContent+=`
+                      <option value=${responseObject.user_name} label=${responseObject.user_name}>${responseObject.user_name}</option>
+                      `;
 
         });
         //console.log(newContent);
-        document.getElementById("user_list").innerHTML = newContent;
+        
+        document.getElementById("user_option").innerHTML = tempContent;
       } else {
         console.log(`[${temp_var.status}] : ${temp_var.statusText}`);
       }
     };
 
+    // 이미지 div에 최근 부정행위 로드
     var images = new XMLHttpRequest();
         images.open("GET", "https://29bjyftjhi.execute-api.us-east-1.amazonaws.com/icu-rest-index-image");
         images.send();
@@ -151,8 +161,8 @@
             // Deserializing (String → Object)
             imageObject = JSON.parse(images.responseText);
             // JSON → HTML String
-            var count = 0;
             let imageContent = '';
+            
             imageObject.forEach((imageObject) => {
 
               imageContent +=
@@ -176,7 +186,7 @@
           }
         };
 
-
+  /* 버튼클릭 이벤트 div 이미지 변경 - 필요없음
   function click_event(clicked_id) {
     var my_url="https://nmda822ird.execute-api.us-east-1.amazonaws.com/dev/icu-func-user-image?table=cheat_list&test_num="+String(clicked_id)
     console.log(my_url)
@@ -213,7 +223,49 @@
   }
 
 } 
-  /*
+*/
+
+/*드랍다운 변화시 div 이미지 변경*/
+function change_select(){
+    var op = document.getElementById("user_option");
+    var sel_val=op.options[op.selectedIndex].value;
+    
+    var my_url="https://nmda822ird.execute-api.us-east-1.amazonaws.com/dev/icu-func-user-image?table=cheat_list&test_num="+String(sel_val)
+    console.log(my_url)
+    var click_var = new XMLHttpRequest();
+    click_var.open("GET", my_url);
+    
+    click_var.send();
+    click_var.onreadystatechange = function () {
+      if (click_var.readyState !== XMLHttpRequest.DONE) return;
+      if (click_var.status === 200) {
+        let newContent='';
+        resp = JSON.parse(click_var.responseText);
+        
+        resp.forEach((resp) => {
+          newContent += 
+                            `
+                            <div class="col-md-4 mb-5" >
+                              <div class="card h-100">
+                                <img class="card-img-top" src="${resp.img_url}" alt="">
+                                <div class="card-body">
+                                  <h4 class="card-title">${resp.test_num}번  응시자</h4>
+                                  <p class="card-text">2020.11.27.13:57:32<br>비인가 디바이스 착용</p>
+                                </div>
+                              </div>
+                            </div>
+                            `;
+        });
+        document.getElementById("image_list").innerHTML = newContent;
+      } else {
+        console.log(`[${click_var.status}] : ${click_var.statusText}`);
+      }
+    
+  
+  }
+
+  }
+  /* 자동 div 새로고침
   playAlert = setInterval(function() {
     var temp_var = new XMLHttpRequest();
     temp_var.open("GET", "https://0jrsvc8y79.execute-api.us-east-1.amazonaws.com/icu-rest-index");
@@ -234,7 +286,7 @@
                         </div>`;
         });
         //console.log(newContent);
-        document.getElementById("user_list").innerHTML = newContent;
+        document.getElementById("user_list").innerHTML = newContent; 수정필요
       } else {
         console.log(`[${temp_var.status}] : ${temp_var.statusText}`);
       }
