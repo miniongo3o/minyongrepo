@@ -17,50 +17,52 @@ var graph_var = new XMLHttpRequest();
         robj.forEach((robj) => {
             arr.push(robj.count);      
         });
+        var ctx = document.getElementById("myBarChart");
+
+        var myLineChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ["시선", "이어폰", "책상위", "사람"],
+            datasets: [{
+              label: "Revenue",
+              backgroundColor: "rgba(2,117,216,1)",
+              borderColor: "rgba(2,117,216,1)",
+              data: [Number(arr[0]), Number(arr[1]), Number(arr[2]), Number(arr[3])],
+            }],
+          },
+          options: {
+            scales: {
+              xAxes: [{
+                time: {
+                  unit: 'month'
+                },
+                gridLines: {
+                  display: false
+                },
+                ticks: {
+                  maxTicksLimit: 6
+                }
+              }],
+              yAxes: [{
+                ticks: {
+                  min: 0,
+                  max: 5,
+                  maxTicksLimit: 5
+                },
+                gridLines: {
+                  display: true
+                }
+              }],
+            },
+            legend: {
+              display: false
+            }
+          }
+        });
+        
+
       } else {
         console.log(`[${graph_var.status}] : ${graph_var.statusText}`);
       }
     };
 
-var ctx = document.getElementById("myBarChart");
-
-var myLineChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ["시선", "이어폰", "책상위", "사람"],
-    datasets: [{
-      label: "Revenue",
-      backgroundColor: "rgba(2,117,216,1)",
-      borderColor: "rgba(2,117,216,1)",
-      data: [Number(arr[0]), Number(arr[1]), 1, 4],
-    }],
-  },
-  options: {
-    scales: {
-      xAxes: [{
-        time: {
-          unit: 'month'
-        },
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          maxTicksLimit: 6
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          min: 0,
-          max: 5,
-          maxTicksLimit: 5
-        },
-        gridLines: {
-          display: true
-        }
-      }],
-    },
-    legend: {
-      display: false
-    }
-  }
-});
