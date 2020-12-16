@@ -59,45 +59,49 @@
 
   <!-- Page Content -->
   <div class="container">
-
     <div class="row">
-      <div class="col-md-8 mb-5">
+      <div class="col-md-6 mb-5">
         <h2><select name='user_option' id='user_option' onchange="change_select()"></select></h2>
         <hr>
-
-        <!--1216-->
+<!--1216-->
         <div class="col-xl-12">
           <div class="card mb-4">
-              <div class="card-header">
-                  <i class="fas fa-chart-bar mr-1"></i>
-                  부정 행위 현황
-              </div>
-              <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-          </div>
-      </div>
-      <!--1216-->
-
-
-        <!--<a class="btn btn-primary btn-lg" href="#">Call to Action &raquo;</a>-->
-      </div>
-      <div class="col-md-4 mb-5">
-        <h2>비상연락처</h2>
-        <hr>
-        <address>
-          <strong>ICU 최종 관리자</strong>
-          <br>멀티캠퍼스
-          <br>베버리 힐즈, 108동 905호
-          <br>
-        </address>
-        <address>
-          <abbr title="Phone">P:</abbr>
-          (123) 456-7890
-          <br>
-          <abbr title="Email">E:</abbr>
-          minyong@icu.com
-        </address>
+            <div class="card-header">
+              <i class="fas fa-chart-bar mr-1"></i>부정 행위 현황
+            </div>
+          <div class="card-body"><canvas id="myBarChart"></canvas></div>
+        </div>
       </div>
     </div>
+<!--1216-->
+  <div class="col-md-6 mb-5">
+    <h2><select name='user_option' id='user_option' onchange="change_select()"></select></h2>
+    <hr>
+    <!--1216-->
+    <div class="col-xl-12">
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fas fa-chart-bar mr-1"></i>부정 행위 합계
+        </div>
+          <div class="card-body">
+            <div class="chart-pie pt-4 pb-2">
+              <canvas id="myPieChart"></canvas>
+            </div>
+              <div class="mt-4 text-center small">
+                <span class="mr-2">
+                  <i class="fas fa-circle text-primary"></i> Direct
+                </span>
+                <span class="mr-2">
+                  <i class="fas fa-circle text-success"></i> Social
+                </span>
+                <span class="mr-2">
+                  <i class="fas fa-circle text-info"></i> Referral
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <!-- /.row -->
 
     <h2>최신 부정행위 이미지</h2>
@@ -112,9 +116,9 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; ICU 2020</p>
+  <footer class="py-5 bg-dark" >
+    <div class="container" >
+      <p class="m-0 text-center text-white" >Copyright &copy; ICU 2020</p>
     </div>
     <!-- /.container -->
   </footer>
@@ -125,6 +129,7 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
   <script src="assets/demo/chart-bar-demo.js"></script>
+  <script src="assets/demo/chart-pie-demo.js"></script>
   
   
 
