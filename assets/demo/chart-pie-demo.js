@@ -3,11 +3,39 @@ Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,Bli
 Chart.defaults.global.defaultFontColor = '#858796';
 
 // Pie Chart Example
+var temp_arr = [];
+var pie_var = new XMLHttpRequest();
+    
+    pie_var.open("GET", "https://hiput6bvql.execute-api.us-east-1.amazonaws.com/icu-api-get-pie-graph");
+    pie_var.send();
+    pie_var.onreadystatechange = function () {
+
+      if (pie_var.readyState !== XMLHttpRequest.DONE) return;
+      if (pie_var.status === 200) {
+        pie_obj = JSON.parse(pie_var.responseText);
+        //console.log( pie_obj[1].cheat_num );
+        
+        pie_obj.forEach((element) => {
+          
+          temp_arr.push(element.count);
+            
+        });
+      } else {
+        console.log(`[${pie_var.status}] : ${pie_var.statusText}`);
+      }
+    };
+
+
+console.log(temp_arr);
+console.log(temp_arr['0']);
+console.log(temp_arr[0]);
+
+
 var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Direct", "Referral", "Social"],
+    labels: ["시선이동", "디바이스착용", "사람감지"],
     datasets: [{
       data: [55, 30, 15],
       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
