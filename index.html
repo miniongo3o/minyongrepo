@@ -10,12 +10,9 @@
 
   <title>ICU</title>
 
-  <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
   <link href="css/business-frontpage.css" rel="stylesheet">
-
+  <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -23,19 +20,18 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <img src="./img/haedicu.png" style="width: 220px;">
+      <a href="./"><img src="./img/haedicu.png" style="width: 220px;"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <img src="./img/msg.png" style="width:125px; margin-top: 5px;" >  
+            <a href="#"><img src="./img/msg.png" style="width:125px; margin-top: 5px;" ></a>
               <span class="sr-only">(current)</span>
-            </a>
           </li>
           <li class="nav-item">
-            <img src="./img/login.png" style="width:125px; margin-top: 5px;">  
+            <a href="#"><img src="./img/login.png" style="width:125px; margin-top: 5px;"></a>
           </li>
 
         </ul>
@@ -62,31 +58,32 @@
 
   <!-- Page Content -->
   <div class="container">
+    <div class="row" style="margin-bottom: 15px; margin-left: 15px;">
+      <h2><select name='user_option' id='user_option' onchange="change_select()"></select></h2>
+    </div>
+    <hr>
     <div class="row">
       <div class="col-md-6 mb-5">
-        <h2><select name='user_option' id='user_option' onchange="change_select()"></select></h2>
-        <hr>
 <!--1216-->
         <div class="col-xl-12">
           <div class="card mb-4">
             <div class="card-header">
-              <i class="fas fa-chart-bar mr-1"></i>부정 행위 현황
+              <img src="./img/now_cheat_1.png" style="width:150px; ">
             </div>
-          <div class="card-body"><canvas id="myBarChart"></canvas></div>
+          <div class="card-body-graph"><canvas id="myBarChart"></canvas></div>
         </div>
       </div>
     </div>
 <!--1216-->
   <div class="col-md-6 mb-5">
-    <h2><select name='user_option' id='user_option' onchange="change_select()"></select></h2>
-    <hr>
+    
     <!--1216-->
     <div class="col-xl-12">
       <div class="card mb-4">
         <div class="card-header">
-          <i class="fas fa-chart-bar mr-1"></i>부정 행위 합계
+          <img src="./img/sum_cheat_1.png" style="width:150px; ">
         </div>
-          <div class="card-body">
+          <div class="card-body-graph">
             <div class="chart-pie pt-4 pb-2">
               <canvas id="myPieChart"></canvas>
             </div>
@@ -110,7 +107,9 @@
       </div>
     <!-- /.row -->
 
-    <h2>최신 부정행위 이미지</h2>
+    
+    <img src="./img/img_list.png" style="width:450px; margin-bottom:10px;">
+    
     <div class="row" id="image_list">
       
 

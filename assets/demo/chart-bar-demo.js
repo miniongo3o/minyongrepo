@@ -25,7 +25,7 @@ var graph_var = new XMLHttpRequest();
             labels: ["시선", "이어폰", "책상위", "사람"],
             datasets: [{
               label: "Revenue",
-              backgroundColor: "rgba(2,117,216,1)",
+              backgroundColor: "rgba(73,231,193,1)",
               borderColor: "rgba(2,117,216,1)",
               data: [Number(arr[0]), Number(arr[1]), Number(arr[2]), Number(arr[3])],
             }],
@@ -47,7 +47,7 @@ var graph_var = new XMLHttpRequest();
                 ticks: {
                   min: 0,
                   max: 5,
-                  maxTicksLimit: 5
+                  maxTicksLimit: 10
                 },
                 gridLines: {
                   display: true
