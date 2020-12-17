@@ -5,7 +5,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 // Pie Chart Example
 var temp_arr = [];
 var pie_var = new XMLHttpRequest();
-    
+var pie_obj;
     pie_var.open("GET", "https://hiput6bvql.execute-api.us-east-1.amazonaws.com/icu-api-get-pie-graph");
     pie_var.send();
     pie_var.onreadystatechange = function () {
@@ -13,7 +13,7 @@ var pie_var = new XMLHttpRequest();
       if (pie_var.readyState !== XMLHttpRequest.DONE) return;
       if (pie_var.status === 200) {
         pie_obj = JSON.parse(pie_var.responseText);
-        //console.log( pie_obj[1].cheat_num );
+        
         
         for(const key in pie_obj)
         {

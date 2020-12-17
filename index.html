@@ -83,7 +83,7 @@
         <div class="card-header">
           <img src="./img/sum_cheat_1.png" style="width:150px; ">
         </div>
-          <div class="card-body-graph">
+          <div class="card-body-graph" id="pie-body">
             <div class="chart-pie pt-4 pb-2">
               <canvas id="myPieChart"></canvas>
             </div>
@@ -243,16 +243,16 @@
 } 
 */
 
-/*드랍다운 변화시 div 이미지 변경*/
+/*드랍다운 변화시 div 이미지 변경*/ 
 function change_select(){
     var op = document.getElementById("user_option");
     var sel_val=op.options[op.selectedIndex].value;
     
     var my_url="https://nmda822ird.execute-api.us-east-1.amazonaws.com/dev/icu-func-user-image?table=cheat_list&test_num="+String(sel_val)
+ 
     console.log(my_url)
     var click_var = new XMLHttpRequest();
     click_var.open("GET", my_url);
-    
     click_var.send();
     click_var.onreadystatechange = function () {
       if (click_var.readyState !== XMLHttpRequest.DONE) return;
@@ -275,12 +275,72 @@ function change_select(){
                             `;
         });
         document.getElementById("image_list").innerHTML = newContent;
+
+
       } else {
         console.log(`[${click_var.status}] : ${click_var.statusText}`);
       }
     
   
   }
+  
+  var personal_arr = [];
+  var per_pie_var = new XMLHttpRequest();
+
+    personal_url="https://pn6taa7dj4.execute-api.us-east-1.amazonaws.com/dev/icu-personal-data-for-pie?table=cheat_list&test_num="+String(sel_val)
+
+    per_pie_var.open("GET", personal_url);
+    per_pie_var.send();
+    per_pie_var.onreadystatechange = function () {
+    var temp_sum=0;
+      if (per_pie_var.readyState !== XMLHttpRequest.DONE) return;
+      if (per_pie_var.status === 200) {
+        per_obj = JSON.parse(per_pie_var.responseText);
+        if(per_obj=='none'){
+                  
+
+        }
+
+
+        var ctx = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ["시선이동", "디바이스", "사람감지","음성감지","none"],
+            datasets: [{
+              data: [per_obj['1'], per_obj['2'], per_obj['3'], per_obj['4']],
+              backgroundColor: ['#00FF99', '#0099FF', '#00FFCC','#66FFFF'],
+              hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+              hoverBorderColor: "rgba(234, 236, 244, 1)",
+            }],
+          },
+          options: {
+            maintainAspectRatio: false,
+            tooltips: {
+              backgroundColor: "rgb(255,255,255)",
+              bodyFontColor: "#858796",
+              borderColor: '#dddfeb',
+              borderWidth: 1,
+              xPadding: 15,
+              yPadding: 15,
+              displayColors: false,
+              caretPadding: 10,
+            },
+            legend: {
+              display: false
+            },
+            cutoutPercentage: 80,
+          },
+        });
+        
+
+      } else {
+        console.log(`[${per_pie_var.status}] : ${per_pie_var.statusText}`);
+      }
+    };
+
+
+
 
   }
 
