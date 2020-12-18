@@ -22,7 +22,7 @@ var graph_var = new XMLHttpRequest();
         var myLineChart = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: ["시선", "이어폰", "책상위", "사람"],
+            labels: ["1번 응시자", "2번 응시자", "3번 응시자", "4번 응시자"],
             datasets: [{
               label: "Revenue",
               backgroundColor: "rgba(73,231,193,1)",

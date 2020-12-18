@@ -89,16 +89,19 @@
             </div>
               <div class="mt-4 text-center small">
                 <span class="mr-2">
-                  <i class="fas fa-circle text-primary"></i> 시선이동
+                  <i class="fas fa-circle text-primary"></i> 이어폰
                 </span>
                 <span class="mr-2">
-                  <i class="fas fa-circle text-success"></i> 사람감지
+                  <i class="fas fa-circle text-success"></i> 시계착용
                 </span>
                 <span class="mr-2">
-                  <i class="fas fa-circle text-info"></i> 디바이스착용
+                  <i class="fas fa-circle text-info"></i> 주변사람
                 </span>
                 <span class="mr-2">
-                  <i class="fas fa-circle text-info"></i> 책상위 물건
+                  <i class="fas fa-circle text-info"></i> 손목위치
+                </span>
+                <span class="mr-2">
+                  <i class="fas fa-circle text-info"></i> 책
                 </span>
               </div>
             </div>
@@ -160,7 +163,7 @@
         // JSON → HTML String
         var count = 0;
         
-        let tempContent = `<option value="*">응시자 선택</option>             `;
+        let tempContent = `<option value="*">응시자 선택</option>`;
         responseObject.forEach((responseObject) => {
 
           
@@ -324,10 +327,10 @@ function change_select(){
         var myPieChart = new Chart(ctx, {
           type: 'doughnut',
           data: {
-            labels: ["시선이동", "디바이스", "사람감지","음성감지","none"],
+            labels: ["이어폰", "시계", "주변 사람","손목 위치","책"],
             datasets: [{
-              data: [per_obj['1'], per_obj['2'], per_obj['3'], per_obj['4']],
-              backgroundColor: ['#00FF99', '#0099FF', '#00FFCC','#66FFFF'],
+              data: [per_obj['1'], per_obj['2'], per_obj['3'], per_obj['4'], per_obj['5']],
+              backgroundColor: ['#00FF99', '#0099FF', '#00FFCC','#66FFFF','#e5eb76'],
               hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
               hoverBorderColor: "rgba(234, 236, 244, 1)",
             }],
