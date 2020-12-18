@@ -31,7 +31,7 @@
               <span class="sr-only">(current)</span>
           </li>
           <li class="nav-item">
-            <a href="#"><img src="./img/login.png" style="width:125px; margin-top: 5px;"></a>
+            <a href="#"><img src="./img/logout.png" style="width:125px; margin-top: 5px;" onclick="logout();"></a>
           </li>
 
         </ul>
@@ -142,14 +142,18 @@
   <script>
     
     function isLogin() {
-      if (!localStorage.getItem('token')) {
+      if (localStorage.getItem('token')!='200') {
         
         window.location.href = "login.html";
       }
       console.log(localStorage.getItem('token'))
     }
     isLogin();
+    function logout(){
+      localStorage.clear();
+      window.location.href = "login.html";
 
+    }
     // 드랍다운 리스트에 db응시자수만큼 추가
     var temp_var = new XMLHttpRequest();
     temp_var.open("GET", "https://0jrsvc8y79.execute-api.us-east-1.amazonaws.com/icu-rest-index");

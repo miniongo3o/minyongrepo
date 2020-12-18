@@ -18,6 +18,12 @@
   }
 
 
+#ctr {
+    justify-content: center;
+    float: left;
+    width: 100px;
+    margin: 0auto;
+}
 
 
 

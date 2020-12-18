@@ -4,10 +4,15 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
+        <div id="container">
+        <div id="ctr">
         <input type="text" id='id_input' name="m_id" size="20" tabindex="1" value="" placeholder="아이디를 입력해주세요">
         <input type="password" id='password_input' name="password" size="20" tabindex="2" placeholder="비밀번호를 입력해주세요">
         <button class="btn_type1" onclick="login(document.getElementById('id_input').value, document.getElementById('password_input').value)">
         <span class="txt_type">로그인</span></button>
+        </div>
+        </div>
+        
     <script>
         function isLogin() {
             if (localStorage.getItem('token') == "") {
