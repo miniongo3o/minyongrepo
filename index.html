@@ -196,7 +196,27 @@
             let imageContent = '';
             
             imageObject.forEach((imageObject) => {
-
+              let cheat=imageObject.cheat_num;
+              let cheater;
+              switch (cheat){
+                case '1':
+                  cheater="이어폰착용";
+                  break;
+                case '2':
+                  cheater="시계착용";
+                  break;
+                case '3':
+                  cheater="주변사람인식";
+                  break;
+                case '4':
+                  cheater="손목위치";
+                  break;
+                case '5':
+                  cheater="책 인식";
+                  break;
+                default:
+                  alert('error');
+              }
               imageContent +=
                             `
                             <div class="col-md-4 mb-5" >
@@ -205,8 +225,8 @@
                                 <img class="card-img-top" src="${imageObject.img_url}" alt="" id="use">
                                 </div>
                                 <div class="card-body">
-                                  <h4 class="card-title">${imageObject.tester_num}번 응시자</h4>
-                                  <p class="card-text">2020.11.27.13:57:32<br>비인가 디바이스 착용</p>
+                                  <h4 class="card-title">${imageObject.tester_num}번의 부정행위</h4>
+                                  <p class="card-text">${imageObject.cheat_time}<br>${cheater}</p>
                                 </div>
                               </div>
                             </div>
@@ -246,7 +266,7 @@ function change_select(){
                                 <img class="card-img-top"  src="${m_url}" alt="" id="use">
                                 </div>
                                 <div class="card-body">
-                                  <h4 class="card-title">${sel_val}번  응시자!!</h4>
+                                  <h4 class="card-title">${sel_val}번  응시자</h4>
                                   <p class="card-text">2020.11.27.13:57:32<br>응시자 안면 사진</p>
                                 </div>
                               </div>
@@ -255,6 +275,27 @@ function change_select(){
         resp = JSON.parse(click_var.responseText);
         
         resp.forEach((resp) => {
+          let cheat=resp.cheat_num;
+              let cheater;
+              switch (cheat){
+                case '1':
+                  cheater="이어폰착용";
+                  break;
+                case '2':
+                  cheater="시계착용";
+                  break;
+                case '3':
+                  cheater="주변사람인식";
+                  break;
+                case '4':
+                  cheater="손목위치";
+                  break;
+                case '5':
+                  cheater="책 인식";
+                  break;
+                default:
+                  alert('error');
+              }
           newContent += 
                             `
                             <div class="col-md-4 mb-5" >
@@ -263,8 +304,8 @@ function change_select(){
                                 <img class="card-img-top" src="${resp.img_url}" alt="" id="use"  >
                                 </div>
                                 <div class="card-body">
-                                  <h4 class="card-title">${resp.test_num}번  응시자</h4>
-                                  <p class="card-text">2020.11.27.13:57:32<br>비인가 디바이스 착용</p>
+                                  <h4 class="card-title">${resp.test_num}번의 부정행위</h4>
+                                  <p class="card-text">${resp.cheat_time}<br>${cheater}</p>
                                 </div>
                               </div>
                             </div>
