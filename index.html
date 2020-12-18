@@ -258,6 +258,19 @@ function change_select(){
       if (click_var.readyState !== XMLHttpRequest.DONE) return;
       if (click_var.status === 200) {
         let newContent='';
+        let m_url="https://icu-tester-face-s3.s3.amazonaws.com/userface/"+String(sel_val)+".jpg"
+        if(sel_val!='*')
+        {newContent=`                            
+                            <div class="col-md-4 mb-5" >
+                              <div class="card h-100">
+                                <img class="card-img-top" src="${m_url}" alt="" id="use">
+                                <div class="card-body">
+                                  <h4 class="card-title">${sel_val}번  응시자</h4>
+                                  <p class="card-text">2020.11.27.13:57:32<br>응시자 안면 사진</p>
+                                </div>
+                              </div>
+                            </div>`;
+        }
         resp = JSON.parse(click_var.responseText);
         
         resp.forEach((resp) => {
@@ -265,7 +278,7 @@ function change_select(){
                             `
                             <div class="col-md-4 mb-5" >
                               <div class="card h-100">
-                                <img class="card-img-top" src="${resp.img_url}" alt="">
+                                <img class="card-img-top" src="${resp.img_url}" alt="" id="use">
                                 <div class="card-body">
                                   <h4 class="card-title">${resp.test_num}번  응시자</h4>
                                   <p class="card-text">2020.11.27.13:57:32<br>비인가 디바이스 착용</p>
@@ -306,7 +319,7 @@ function change_select(){
           data: {
             labels: ["없음"],
             datasets: [{
-              data: [10],
+              data: [1],
               backgroundColor: ['#000000'],
               hoverBackgroundColor: ['#000000'],
               hoverBorderColor: "rgba(234, 236, 244, 1)",
