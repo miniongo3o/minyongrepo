@@ -3,7 +3,7 @@
         <meta charset="utf-8">
     </head>
 <body>
-    <nav class="include" include-html="./nav.html"></nav>
+    
     <div class="section_login" style="margin-top:200px">
         <h3 class="tit_login">로그인</h3>
         <div class="write_form">
@@ -14,8 +14,8 @@
                     placeholder="비밀번호를 입력해주세요">
 
                 <button class="btn_type1"
-                    onclick="login(document.getElementById('id_input').value, document.getElementById('password_input').value)"><span
-                        class="txt_type">로그인</span></button>
+                    onclick="login(document.getElementById('id_input').value, document.getElementById('password_input').value)">
+                    <span class="txt_type">로그인</span></button>
                 <!-- </form> -->
 
             </div>
@@ -34,12 +34,12 @@
 
         function login(id, password) {
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", "https://5wzllwnu4k.execute-api.us-east-1.amazonaws.com/icu-login");
+            xhr.open("POST", "https://5wzllwnu4k.execute-api.us-east-1.amazonaws.com/icu-login/user");
             
             xhr.setRequestHeader('Content-type', 'application/json');
             console.log(id)
             console.log(password)
-            xhr.send(JSON.stringify({ userid: id, password: password }));
+            xhr.send(JSON.stringify({ "userid": id, "password": password }));
 
 
             xhr.onreadystatechange = function() {
