@@ -108,11 +108,12 @@
           </div>
         </div>
       </div>
+    </div>
     <!-- /.row -->
 
-    
-    <img src="./img/img_list.png" style="width:450px; margin-bottom:10px;">
-    
+    <div class="row">
+      <img src="./img/img_list.png" style="width:450px; height:75px; margin-bottom:10px;">
+    </div>
     <div class="row" id="image_list">
       
 
@@ -200,7 +201,9 @@
                             `
                             <div class="col-md-4 mb-5" >
                               <div class="card h-100">
-                                <img class="card-img-top" src="${imageObject.img_url}" alt="">
+                                <div id="bye">
+                                <img class="card-img-top" src="${imageObject.img_url}" alt="" id="use">
+                                </div>
                                 <div class="card-body">
                                   <h4 class="card-title">${imageObject.tester_num}번 응시자</h4>
                                   <p class="card-text">2020.11.27.13:57:32<br>비인가 디바이스 착용</p>
@@ -239,9 +242,11 @@ function change_select(){
         {newContent=`                            
                             <div class="col-md-4 mb-5" >
                               <div class="card h-100">
-                                <img class="card-img-top" src="${m_url}" alt="" id="use">
+                                <div id="bye">
+                                <img class="card-img-top"  src="${m_url}" alt="" id="use">
+                                </div>
                                 <div class="card-body">
-                                  <h4 class="card-title">${sel_val}번  응시자</h4>
+                                  <h4 class="card-title">${sel_val}번  응시자!!</h4>
                                   <p class="card-text">2020.11.27.13:57:32<br>응시자 안면 사진</p>
                                 </div>
                               </div>
@@ -253,8 +258,10 @@ function change_select(){
           newContent += 
                             `
                             <div class="col-md-4 mb-5" >
-                              <div class="card h-100">
-                                <img class="card-img-top" src="${resp.img_url}" alt="" id="use">
+                              <div class="card h-100" >
+                                <div id="bye">
+                                <img class="card-img-top" src="${resp.img_url}" alt="" id="use"  >
+                                </div>
                                 <div class="card-body">
                                   <h4 class="card-title">${resp.test_num}번  응시자</h4>
                                   <p class="card-text">2020.11.27.13:57:32<br>비인가 디바이스 착용</p>

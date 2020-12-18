@@ -6,6 +6,7 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 var graph_var = new XMLHttpRequest();
     var arr = [];
+    var num_arr=[];
     graph_var.open("GET", "https://uvrmnxwp43.execute-api.us-east-1.amazonaws.com/icu-get-cheat-count-for-graph");
     graph_var.send();
     graph_var.onreadystatechange = function () {
@@ -15,19 +16,20 @@ var graph_var = new XMLHttpRequest();
         robj = JSON.parse(graph_var.responseText);
         
         robj.forEach((robj) => {
-            arr.push(robj.count);      
+            arr.push(   String(robj.test_num)+"번 응시자"   );    
+            num_arr.push(Number(robj.count));  
         });
         var ctx = document.getElementById("myBarChart");
 
         var myLineChart = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: ["1번 응시자", "2번 응시자", "3번 응시자", "4번 응시자"],
+            labels: arr,
             datasets: [{
               label: "Revenue",
               backgroundColor: "rgba(73,231,193,1)",
               borderColor: "rgba(2,117,216,1)",
-              data: [Number(arr[0]), Number(arr[1]), Number(arr[2]), Number(arr[3])],
+              data: num_arr,
             }],
           },
           options: {
