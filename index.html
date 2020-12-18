@@ -137,13 +137,14 @@
 
   <script>
     
-    // function isLogin() {
-    //   if (!localStorage.getItem('token')) {
-    //     window.location.href = "login.html";
-    //   }
-    //   console.log(localStorage.getItem('token'))
-    // }
-    // isLogin();
+    function isLogin() {
+      if (!localStorage.getItem('token')) {
+        
+        window.location.href = "login.html";
+      }
+      console.log(localStorage.getItem('token'))
+    }
+    isLogin();
 
     // 드랍다운 리스트에 db응시자수만큼 추가
     var temp_var = new XMLHttpRequest();
