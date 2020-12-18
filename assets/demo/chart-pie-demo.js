@@ -26,7 +26,7 @@ var pie_obj;
           data: {
             labels: ["이어폰", "시계", "주변 사람","손목 위치","책!"],
             datasets: [{
-              data: [pie_obj[0].count, pie_obj[1].count, pie_obj[2].count, pie_obj[3].count, pie_obj[4].count],
+              data: [temp_arr[0], temp_arr[1], temp_arr[2], temp_arr[3], temp_arr[4]],
               backgroundColor: ['#00FF99', '#0099FF', '#00FFCC','#66FFFF','#e5eb76'],
               hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
               hoverBorderColor: "rgba(234, 236, 244, 1)",
