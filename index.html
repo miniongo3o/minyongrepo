@@ -423,67 +423,75 @@ function change_select(){
 
 
 
-
-  /* 자동 div 새로고침
+  
+  /* 자동 div 새로고침*/
+  /*
   playAlert = setInterval(function() {
-    var temp_var = new XMLHttpRequest();
-    temp_var.open("GET", "https://0jrsvc8y79.execute-api.us-east-1.amazonaws.com/icu-rest-index");
-    temp_var.send();
-    temp_var.onreadystatechange = function () {
-      if (temp_var.readyState !== XMLHttpRequest.DONE) return;
-      if (temp_var.status === 200) {
-        //console.log(temp_var.responseText);
-        // Deserializing (String → Object)
-        responseObject = JSON.parse(temp_var.responseText);
-        // JSON → HTML String
-        var count = 0;
-        let newContent = '';
-        responseObject.forEach((responseObject) => {
-          newContent += `
-                        <div class="item" style="font-size:x-large" >
-                            <a class="name" href="#" id='tester' value=${responseObject.user_name}>${responseObject.user_name}번 응시자</a>
-                        </div>`;
-        });
-        //console.log(newContent);
-        document.getElementById("user_list").innerHTML = newContent; 수정필요
-      } else {
-        console.log(`[${temp_var.status}] : ${temp_var.statusText}`);
-      }
-    };
-    
-    var images = new XMLHttpRequest();
-        images.open("GET", "https://29bjyftjhi.execute-api.us-east-1.amazonaws.com/icu-rest-index-image");
-        images.send();
-        images.onreadystatechange = function () {
-          if (images.readyState !== XMLHttpRequest.DONE) return;
-          if (images.status === 200) {
-            //console.log(images.responseText);
-            // Deserializing (String → Object)
-            imageObject = JSON.parse(images.responseText);
+  var ops = document.getElementById("user_option");
+  var my_val=ops.options[ops.selectedIndex].value;
+  if(my_val=='*'){
+    alert(my_val);
+  var auto_images = new XMLHttpRequest();
+          auto_images.open("GET", "https://29bjyftjhi.execute-api.us-east-1.amazonaws.com/icu-rest-index-image");
+          auto_images.send();
+          auto_images.onreadystatechange = function () {
+
+          if (auto_images.readyState !== XMLHttpRequest.DONE) return;
+          if (auto_images.status === 200) {
+            
+            
+            autoObj = JSON.parse(auto_images.responseText);
             // JSON → HTML String
-            var count = 0;
-            let imageContent = '';
-            imageObject.forEach((imageObject) => {
-              imageContent +=
+            let autoContent = '';
+            
+            autoObj.forEach((autoObj) => {
+              let cheat=autoObj.cheat_num;
+              let cheater;
+              switch (cheat){
+                case '1':
+                  cheater="이어폰 착용";
+                  break;
+                case '2':
+                  cheater="시계 착용";
+                  break;
+                case '3':
+                  cheater="주변 사람 인식";
+                  break;
+                case '4':
+                  cheater="손목 위치";
+                  break;
+                case '5':
+                  cheater="책 인식";
+                  break;
+                default:
+                  alert('error');
+              }
+              autoContent +=
                             `
                             <div class="col-md-4 mb-5" >
                               <div class="card h-100">
-                                <img class="card-img-top" src="${imageObject.img_url}" alt="">
+                                <div id="bye">
+                                <img class="card-img-top" src="${autoObj.img_url}" alt="" id="use">
+                                </div>
                                 <div class="card-body">
-                                  <h4 class="card-title">${imageObject.tester_num}번 응시자</h4>
-                                  <p class="card-text">2020.11.27.13:57:32<br>비인가 디바이스 착용</p>
+                                  <h4 class="card-title">${autoObj.tester_num}번의 부정행위</h4>
+                                  <p class="card-text">${autoObj.cheat_time}<br>${cheater}</p>
                                 </div>
                               </div>
                             </div>
                             `;
+
             });
-            document.getElementById("image_list").innerHTML = imageContent;
+
+            document.getElementById("image_list").innerHTML = autoContent;
           } else {
-            console.log(`[${images.status}] : ${images.statusText}`);
+            console.log(`[${auto_images.status}] : ${auto_images.statusText}`);
           }
         };
+      }
 }, 10000);
 */
+
   </script>
 
 </body>
