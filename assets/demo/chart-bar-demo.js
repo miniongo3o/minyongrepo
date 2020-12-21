@@ -42,13 +42,13 @@ var graph_var = new XMLHttpRequest();
                   display: false
                 },
                 ticks: {
-                  maxTicksLimit: 6
+                  maxTicksLimit: 10
                 }
               }],
               yAxes: [{
                 ticks: {
                   min: 0,
-                  max: 5,
+                  max: 10,
                   maxTicksLimit: 10
                 },
                 gridLines: {
