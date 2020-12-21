@@ -425,12 +425,13 @@ function change_select(){
 
   
   /* 자동 div 새로고침*/
-  /*
+  
   playAlert = setInterval(function() {
+    alert('h');
   var ops = document.getElementById("user_option");
   var my_val=ops.options[ops.selectedIndex].value;
   if(my_val=='*'){
-    alert(my_val);
+    
   var auto_images = new XMLHttpRequest();
           auto_images.open("GET", "https://29bjyftjhi.execute-api.us-east-1.amazonaws.com/icu-rest-index-image");
           auto_images.send();
@@ -490,7 +491,7 @@ function change_select(){
         };
       }
 }, 10000);
-*/
+
 
   </script>
 
